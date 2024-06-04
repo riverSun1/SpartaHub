@@ -12,7 +12,7 @@ import {
 const ProfileEdit = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [Username, setUsername] = useState("");
   const [track, setTrack] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -59,8 +59,8 @@ const ProfileEdit = () => {
         <Input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
         {/* Password Input */}
         <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        {/* Nickname Input */}
-        <Input type="text" placeholder="Nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+        {/* Username Input */}
+        <Input type="text" placeholder="Username" value={Username} onChange={(e) => setUsername(e.target.value)} />
         {/* Track Selection */}
         <Select value={track} onChange={(e) => setTrack(e.target.value)}>
           <option value="">Your track</option>

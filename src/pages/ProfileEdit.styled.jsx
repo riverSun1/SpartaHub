@@ -61,11 +61,11 @@ export const EditButton = styled(Button)`
   &:hover {
     background-color: #e8344e;
   }
-  margin-top: 20px; /* 위에 Select와의 간격을 위해 추가된 스타일 */
+  margin-top: 20px;
 `;
 
 export const Select = styled.select`
-  margin-bottom: 20px; /* EditButton과의 간격을 위해 수정된 스타일 */
+  margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
