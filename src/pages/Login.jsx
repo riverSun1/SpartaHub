@@ -19,6 +19,8 @@ const Form = styled.form`
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [track, settrack] = useState("");
   const [user, setUser] = useState(null);
 
   const onChangeEmail = (e) => {
@@ -27,6 +29,14 @@ function Login() {
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const onChangeUsername = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const onChangeTrack = (e) => {
+    settrack(e.target.value);
   };
 
   useEffect(() => {
@@ -84,6 +94,18 @@ function Login() {
           placeholder="비밀번호"
           value={password}
           onChange={onChangePassword}
+        />
+        <input
+          type="text"
+          placeholder="닉네임"
+          value={username}
+          onChange={onChangeUsername}
+        />
+        <input
+          type="text"
+          placeholder="트랙"
+          value={track}
+          onChange={onChangeTrack}
         />
         <Button onClick={signInUser}>로그인</Button>
         <button onClick={signUpNewUser}>회원가입</button>
