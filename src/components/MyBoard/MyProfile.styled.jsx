@@ -17,7 +17,7 @@ export const ProfileSection = styled.section`
 `;
 
 export const ProfileLogo = styled.img`
-  background-image: url("/spartahub_logo.PNG");
+  background-image: url("/spartahub_logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -50,7 +50,6 @@ export const ProfileName = styled.p`
 `;
 
 export const ProfileBtn = styled.button`
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   margin-top: 20px;
   padding: 13px 23px;
   background-color: var(--pink-50);
@@ -68,6 +67,6 @@ export const ProfileBtn = styled.button`
 
   &:active {
     box-shadow: none;
-    transform: translateY(1px);
+    transform: translateY(2px);
   }
 `;
