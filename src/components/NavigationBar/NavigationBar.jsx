@@ -1,19 +1,13 @@
-import {
-  LoginIcon,
-  LogoContainer,
-  LogoImg,
-  NavItem,
-  NavLink,
-  NavList,
-  Navbar,
-} from "./NavigationBar.styled";
+import { LoginIcon, LogoContainer, LogoImg, NavItem, NavLink, NavList, Navbar } from "./NavigationBar.styled";
 
 const NavigationBar = () => {
   return (
     <Navbar>
       <LogoContainer>
         <NavLink to="/">
-          <LogoImg src="public/spartahub_logo.png" alt="홈 로고" />
+          {/* <LogoImg src="public/spartahub_logo.png" alt="홈 로고" /> */}
+          {/* NavigationBar import로 쓸 때 이미지가 불러와 지지 않아서 경로 부분 수정했습니다 */}
+          <LogoImg src="/spartahub_logo.png" alt="홈 로고" />
         </NavLink>
       </LogoContainer>
       <NavList>
@@ -28,7 +22,9 @@ const NavigationBar = () => {
         </NavItem>
       </NavList>
       <NavLink to="/login">
-        <LoginIcon src="public/login_icon.png" alt="로그인 아이콘" />
+        {/* <LoginIcon src="public/login_icon.png" alt="로그인 아이콘" /> */}
+        {/* NavigationBar import로 쓸 때 이미지가 불러와 지지 않아서 경로 부분 수정했습니다 */}
+        <LoginIcon src="/login_icon.png" alt="로그인 아이콘" />
       </NavLink>
     </Navbar>
   );
