@@ -1,53 +1,64 @@
-import { useState } from "react";
+// import { useState } from "react";
+// import { createClient } from '@supabase/supabase-js';
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// // 본인 것 사용하기
+// const supabaseUrl = 'https://hprhdyqwygxnybacmqct.supabase.co'; 
+// // vite에서 env 사용하는 법
+// const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+// const supabase = createClient(supabaseUrl, supabaseKey);
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+// function Login() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [user, setUser] = useState(null);
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+//   const onChangeEmail = (e) => {
+//     setEmail(e.target.value);
+//   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!email.trim()) {
-      alert("이메일을 입력해 주세요.");
-      return;
-    }
-    
-    if (!password.trim()) {
-      alert("비밀번호를 입력해 주세요.");
-      return;
-    }
-  };
+//   const onChangePassword = (e) => {
+//     setPassword(e.target.value);
+//   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">이메일:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">비밀번호:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  );
-}
+//   const signUpNewUser = async (e) => {
+//     e.preventDefault();
+//     const { data, error } = await supabase.auth.signUp({
+//       email,
+//       password,
+//     });
+//     console.log("signup: ", { data, error }); // data에 뭐 들어있는지 확인하기
+//     setUser(data.user);
+//   }
 
-export default Login;
+//   if (!user) {
+//     return (
+//       <form>
+//         <input
+//           type="text"
+//           placeholder="이메일"
+//           value={email}
+//           onChange={onChangeEmail}
+//         />
+//         <input
+//           type="password"
+//           placeholder="비밀번호"
+//           value={password}
+//           onChange={onChangePassword}
+//         />
+//         <button>로그인</button>
+//         <button>회원가입</button>
+//         <button>구글 계정으로 로그인</button>
+//         <button>카카오 계정으로 로그인</button>
+//       </form>
+//     );
+//   } else {
+//     return (
+//       <div>
+//         Logged in!
+//         <button>로그아웃</button>
+//       </div>
+//     );
+//   }
+// }
+
+// export default Login;
