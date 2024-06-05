@@ -6,14 +6,14 @@ import {
   NavLink,
   NavList,
   Navbar,
-} from "./NavigationBar.styled";
+} from "../NavigationBar/NavigationBar.styled";
 
 const NavigationBar = () => {
   return (
     <Navbar>
       <LogoContainer>
         <NavLink to="/">
-          <LogoImg src="public/spartahub_logo.png" alt="홈 로고" />
+          <LogoImg src="/public/spartahub_logo.png" alt="홈 로고" />
         </NavLink>
       </LogoContainer>
       <NavList>
@@ -28,7 +28,7 @@ const NavigationBar = () => {
         </NavItem>
       </NavList>
       <NavLink to="/login">
-        <LoginIcon src="public/login_icon.png" alt="로그인 아이콘" />
+        <LoginIcon src="/public/login_icon.png" alt="로그인 아이콘" />
       </NavLink>
     </Navbar>
   );
