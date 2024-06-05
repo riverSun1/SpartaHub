@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../../styles/designToken.css";
 
 export const Container = styled.main`
   display: flex;

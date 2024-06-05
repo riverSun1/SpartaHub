@@ -1,8 +1,11 @@
-import MyBoard from "../components/MyBoard/MyBoard"
+import MyBoard from "../components/MyBoard/MyBoard";
 
 const MyPage = () => {
-  return <MyBoard />
-
+  return (
+    <div>
+      <MyBoard />
+    </div>
+  );
 };
 
 export default MyPage;

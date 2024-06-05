@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../../styles/designToken.css";
 import ReactPaginate from "react-paginate";
 
 export const BoardSection = styled.section`

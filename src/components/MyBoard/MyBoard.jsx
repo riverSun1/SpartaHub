@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Container, ProfileSection, ProfileLogo, ProfileImg, ProfileName, ProfileBtn } from "./MyProfile.styled";
 import {
   BoardSection,
@@ -16,8 +17,8 @@ const itemsPerPage = 10;
 
 const MyPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
- 
- 
+  const navigate = useNavigate();
+  const posts = useSelector((state) => state.posts.posts);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);

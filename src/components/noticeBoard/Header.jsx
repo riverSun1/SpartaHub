@@ -111,7 +111,7 @@ const Header = () => {
         fetchData();
     },[]) 
     const handleChange = ()=>{
-        navigate(`/job/1`)
+        navigate(`/noticeboard/1`)
     }
     
    const TitleDiv=styled.div`

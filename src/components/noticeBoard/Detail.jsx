@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import styled from "styled-components";
 import supabase from '../../supabaseClient';
+import { useSelector } from 'react-redux';
 export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
@@ -85,15 +86,28 @@ const Detail = () => {
     const [nickname, setNickname]= useState("");
     const [url,setUrl] = useState("")
     const [name,setName]= useState("")
+    const getId = async()=>{
+      const{data
+    ,error} = await supabase.auth.getSession();
+    if(error){
+      console.log("get sesion error", error)
+    }else{
+      const user = data.session.user.id
+      console.log(user)
+      }
+
+  }
+  const users = useSelector((state)=>state.user.user)
+  console.log(users)
+  getId()
     const handleAdd = ()=>{
        
       
           const supabaseInsert = async()=>{
           
-              const {error} = await supabase.from("noticeboard").insert({
-                nickname,
-                url,
-                name
+              const {error} = await supabase.from("board").insert({
+                title:nickname,
+                url, 
               })
               if(error){
                   console.log("select_error", error)
@@ -103,6 +117,8 @@ const Detail = () => {
           }
           supabaseInsert();
      }
+
+
       return (
           <>
 
