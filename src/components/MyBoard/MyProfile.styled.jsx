@@ -44,14 +44,20 @@ export const ProfileImg = styled.img`
 `;
 
 export const ProfileName = styled.p`
-  margin-top: 80px;
+  margin: 80px 0 15px 0;
   font-size: 25px;
   text-align: center;
 `;
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+`;
+
 export const ProfileBtn = styled.button`
-  margin-top: 20px;
-  padding: 13px 23px;
+  margin-top: 3px;
+  padding: 10px 20px;
   background-color: var(--pink-50);
   color: var(--pink-90);
   cursor: pointer;
@@ -59,7 +65,12 @@ export const ProfileBtn = styled.button`
   border: 3px solid white;
   border-radius: 15px;
   transition: background-color 0.3s ease;
+  display: inline-block;
+  flex: 1;
 
+  &:first-child {
+    margin-right: 5px;
+  }
   &:hover {
     background-color: var(--red-30);
     color: var(--red-99);

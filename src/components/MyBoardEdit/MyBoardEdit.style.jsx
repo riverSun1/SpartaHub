@@ -36,12 +36,26 @@ export const EditField = styled.div`
 
 export const EditLabel = styled.label`
   display: flex;
-  margin-bottom: 17px;
+  margin-bottom: 10px;
   font-weight: bold;
   font-size: large;
 `;
 
 export const EditInputTitle = styled.input`
+  width: 100%;
+  padding: 8px 0;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: medium;
+  outline: none;
+  &:focus {
+    border-color: var(--red-30);
+  }
+`;
+
+export const EditInputUrl = styled.input`
   width: 100%;
   padding: 10px 0;
   padding-left: 10px;
@@ -55,13 +69,14 @@ export const EditInputTitle = styled.input`
   }
 `;
 
-export const EditInputContent = styled.input`
+export const EditTextAreaContent = styled.textarea`
   width: 100%;
-  padding: 100px 0;
+  height: 150px;
+  padding: 8px;
   padding-left: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: medium;
+  font-size: large;
   outline: none;
   &:focus {
     border-color: var(--red-30);
@@ -93,5 +108,5 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: right;
   gap: 10px;
-  margin-top: 20px;
+  margin: 20px 0 50px 0;
 `;
