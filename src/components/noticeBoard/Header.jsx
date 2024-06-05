@@ -3,7 +3,6 @@ import "../noticeBoard/designToken.css"
 import { useEffect, useState } from 'react';
 import supabase from '../../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { handleDelete } from './Delete';
 export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
@@ -101,7 +100,7 @@ const Header = () => {
     useEffect(()=>{
         const fetchData = async()=>{
         
-            const {data, error} = await supabase.from("noticeboard").select("*")
+            const {data, error} = await supabase.from("board").select("*")
             if(error){
                 console.log("select_error", error)
             }else{
@@ -114,9 +113,7 @@ const Header = () => {
     const handleChange = ()=>{
         navigate(`/job/1`)
     }
-    const handleUpdate = ()=>{
-        navigate("/noticeboard/")
-    }
+    
    const TitleDiv=styled.div`
     width: 100%;
   height: 250px;
@@ -164,10 +161,9 @@ const Header = () => {
            return <>
            <TableRow >
             <TableData>{data.id}</TableData>
-            <TableData>{data.name}</TableData>
-            <TableData><a href={`https://${data.url}.com`} >링크</a></TableData>
+            <TableData>{data.title}</TableData>
+            <TableData><a href={data.url} >링크</a></TableData>
             <TableData>{data.created_at}</TableData>
-            <TableData>{data.nickname}</TableData>
             </TableRow>
             </>
         })}
