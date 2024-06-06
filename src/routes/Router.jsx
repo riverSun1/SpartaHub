@@ -6,6 +6,7 @@ import MyPage from "../pages/MyPage";
 import NoticeBoard from "../pages/NoticeBoard";
 import NoticeboardModify from "../pages/NoticeboardModify";
 import ProfileEdit from "../pages/ProfileEdit";
+import ViewPost from "../components/NoticeBoard/ViewPost";
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/noticeboard" element={<NoticeBoard />} />
         <Route path="/job/:id" element={<NoticeboardModify />} />
         <Route path="/mypage/:id" element={<ProfileEdit />} />
+        <Route path="/post/:id" element={<ViewPost />} />
       </Routes>
     </BrowserRouter>
   );

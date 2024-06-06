@@ -10,8 +10,8 @@ export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 50px;
   align-items: center;
+  margin-top: 50px;
   width: 100%;
 `;
 
@@ -143,12 +143,12 @@ const Header = () => {
   const itemsPerPage = 10;
 
   // 컴포넌트가 처음 마운트될 때 로그인 상태 체크.
-  useEffect(() => {
-    if (!isAuthenticated) {
-      alert("로그인을 해주세요.");
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     alert("로그인을 해주세요.");
+  //     navigate("/login");
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -159,7 +159,7 @@ const Header = () => {
       const { data, error } = await supabase
         .from("board")
         .select("id, title, content,created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
-        .order("id", { ascending: true });
+        .order("created_at", { ascending: false }); // 리스트최신글순
       if (error) {
         console.log("error => ", error);
       } else {
@@ -185,6 +185,10 @@ const Header = () => {
   const offset = currentPage * itemsPerPage;
   const currentPagePosts = boards.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(boards.length / itemsPerPage);
+
+  const handleRowClick = (id) => {
+    navigate(`/post/${id}`);
+  };
 
   if (!isAuthenticated) {
     return null; // 로그인하지 않은 경우 아무것도 렌더링하지 않음
@@ -216,7 +220,7 @@ const Header = () => {
             </thead>
             <tbody>
               {currentPagePosts.map((board) => (
-                <TableRow key={board.id}>
+                <TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
                   <TableData>{board.id}</TableData>
                   <TableData>{board.title}</TableData>
                   <TableData>

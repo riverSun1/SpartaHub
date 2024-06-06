@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
+import hubLogo from "../../assets/images/spartahub_logo.png";
+import loginLogo from "../../assets/images/login_icon.png";
 import {
   Button,
   IconNavLink,
@@ -48,7 +50,7 @@ const NavigationBar = () => {
     <Navbar>
       <LogoContainer>
         <NavLink to="/">
-          <LogoImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
+          <LogoImg src={hubLogo} alt="홈 로고" />
         </NavLink>
       </LogoContainer>
       <NavList>
@@ -64,7 +66,7 @@ const NavigationBar = () => {
       </NavList>
       <IconNavLink>
         <Button onClick={handlelogin}>{isAuthenticated ? "로그아웃" : "로그인"}</Button>
-        <LoginIcon src="src/assets/images/login_icon.png" onClick={moveToMypage} alt="로그인 아이콘" />
+        <LoginIcon src={loginLogo} onClick={moveToMypage} alt="로그인 아이콘" />
       </IconNavLink>
     </Navbar>
   );
