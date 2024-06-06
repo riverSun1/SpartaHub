@@ -18,8 +18,9 @@ export const EditSection = styled.section`
 
 export const Title = styled.h1`
   margin-top: 70px;
-  margin-bottom: 50px;
-  font-size: 2em;
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 export const EditForm = styled.form`
@@ -37,8 +38,7 @@ export const EditField = styled.div`
 export const EditLabel = styled.label`
   display: flex;
   margin-bottom: 10px;
-  font-weight: bold;
-  font-size: large;
+  font-size: medium;
 `;
 
 export const EditInputTitle = styled.input`
@@ -85,8 +85,8 @@ export const EditTextAreaContent = styled.textarea`
 
 export const EditButton = styled.button`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 4px 10px -2px, rgba(0, 0, 0, 0.3) 0px 2px 6px -2px;
-  padding: 10px 35px;
-  font-size: medium;
+  padding: 13px 35px;
+  font-size: small;
   background-color: var(--pink-40);
   color: white;
   border: none;
@@ -108,5 +108,5 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: right;
   gap: 10px;
-  margin: 20px 0 50px 0;
+  margin: 5px 0 50px 0;
 `;
