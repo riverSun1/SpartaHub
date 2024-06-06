@@ -57,7 +57,7 @@ export const ButtonContainer = styled.div`
 
 export const ProfileBtn = styled.button`
   margin-top: 3px;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background-color: var(--pink-50);
   color: var(--pink-90);
   cursor: pointer;

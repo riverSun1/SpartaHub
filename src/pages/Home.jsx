@@ -1,4 +1,4 @@
-import Main from "../components/Hero/Hero";
+import Main from "../components/Main/Main";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 
 const Home = () => {

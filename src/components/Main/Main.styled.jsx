@@ -5,18 +5,23 @@ export const Full = styled.div`
 `;
 
 export const TopBanner = styled.div`
-  background-image: url("src/assets/images/top_banner.png");
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.3) 2000px 2000px inset;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  position: relative;
   width: 100%;
   height: 450px;
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: white;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -26,12 +31,19 @@ export const TextContainer = styled.div`
 `;
 
 export const BottomBanner = styled.div`
-  background-image: url("src/assets/images/bottom_banner.png");
-  background-color: white;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
   height: 500px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 `;
 
 export const H1Container = styled.div`

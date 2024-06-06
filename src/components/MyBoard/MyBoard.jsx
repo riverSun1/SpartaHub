@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/spartahub_logo.png";
+// import { clearAuth } from "../../redux/slices/authSlice";
+import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
+
 import {
   BoardSection,
   Pagination,
@@ -25,6 +29,7 @@ import {
 const itemsPerPage = 10;
 
 const MyPage = () => {
+  const dispatch = useDispatch();
   const [boards, setBoards] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [profileImage, setProfileImage] = useState(null);
@@ -34,21 +39,18 @@ const MyPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (user) {
-        const { data, error } = await supabase
-          .from("board")
-          .select("id, title,  content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false });
-        if (error) {
-          console.log("error => ", error);
-        } else {
-          const formattedData = data.map((item) => ({
-            ...item,
-            created_at: new Date(item.created_at).toLocaleString()
-          }));
-          setBoards(formattedData);
-        }
+      const { data, error } = await supabase
+        .from("board")
+        .select("id, title, content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
+        .order("id", { ascending: true });
+      if (error) {
+        console.log("error => ", error);
+      } else {
+        const formattedData = data.map((item) => ({
+          ...item,
+          created_at: new Date(item.created_at).toLocaleString()
+        }));
+        setBoards(formattedData);
       }
     };
     fetchData();
@@ -84,8 +86,15 @@ const MyPage = () => {
     navigate(`/posts/${id}/edit`);
   };
 
-  const handleClickHome = () => {
-    navigate(`/`);
+  const handleClickLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      dispatch(logout());
+      alert("로그아웃 되었습니다.");
+      navigate("/");
+    } catch (error) {
+      console.log("로그아웃 오류:", error.message);
+    }
   };
 
   const offset = currentPage * itemsPerPage;
@@ -95,12 +104,12 @@ const MyPage = () => {
   return (
     <Container>
       <ProfileSection>
-        <ProfileLogo src="src/assets/images/spartahub_logo.png" alt="로고" />
+        <ProfileLogo src={logo} alt="로고" />
         <ProfileImg src={profileImage || defaultProfileImage} alt="프로필이미지" />
         <ProfileName>{user.user_metadata.username}님</ProfileName>
         <ButtonContainer>
-          <ProfileBtn onClick={handleClickHome}>Home</ProfileBtn>
           <ProfileBtn onClick={handleProfileEdit}>내정보변경</ProfileBtn>
+          <ProfileBtn onClick={handleClickLogout}>로그아웃</ProfileBtn>
         </ButtonContainer>
       </ProfileSection>
       <BoardSection>
