@@ -4,7 +4,9 @@ export const ProfileEditContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
+  padding-top: 150px;
 `;
 
 export const Form = styled.form`
@@ -71,5 +73,5 @@ export const Select = styled.select`
   border-radius: 4px;
   background-color: white;
   font-size: 14px;
-  color: #333;
+  color: #333; /* username과 동일한 색상 */
 `;
