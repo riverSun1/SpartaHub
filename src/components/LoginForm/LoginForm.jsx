@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import homeLogo from "../../assets/spartahub_logo.png";
 import { login } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 import {
@@ -150,7 +151,7 @@ const LoginForm = () => {
               </p>
             </div>
             <ImgContainer>
-              <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
+              <HubImg src={homeLogo} alt="홈 로고" />
             </ImgContainer>
           </FlexDiv>
         </Form>
@@ -197,7 +198,7 @@ const LoginForm = () => {
               </p>
             </div>
             <ImgContainer>
-              <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
+              <HubImg src={homeLogo} alt="홈 로고" />
             </ImgContainer>
           </FlexDiv>
         </Form>
