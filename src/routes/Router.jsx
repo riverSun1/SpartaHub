@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MyBoardEdit from "../components/MyBoardEdit/MyBoardEdit";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyPage from "../pages/MyPage";
 import NoticeBoard from "../pages/NoticeBoard";
-import ProfileEdit from "../pages/ProfileEdit";
-import MyBoardEdit from "../components/MyBoardEdit/MyBoardEdit";
 import NoticeboardModify from "../pages/NoticeboardModify";
+import ProfileEdit from "../pages/ProfileEdit";
 
 const Router = () => {
   return (
