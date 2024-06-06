@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import supabase from "../../../supabaseClient";
 import {
   BoardSection,
@@ -13,6 +14,7 @@ import {
 } from "./BoardList.styled";
 
 const BoardList = () => {
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -31,6 +33,7 @@ const BoardList = () => {
       error.message;
     } else {
       alert("작성 완료!");
+      navigate("/noticeboard");
       error.message;
     }
   };
