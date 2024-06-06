@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Container,
-  ProfileSection,
-  ProfileLogo,
-  ProfileImg,
-  ProfileName,
-  ProfileBtn,
-  ButtonContainer
-} from "./MyProfile.styled";
+import { useNavigate } from "react-router-dom";
+import { clearAuth } from "../../redux/slices/authSlice";
+import supabase from "../../supabaseClient";
 import {
   BoardSection,
-  Table,
-  TableRow,
-  TableHeader,
-  Title,
-  TableData,
+  Pagination,
   PaginationContainer,
-  Pagination
+  Table,
+  TableData,
+  TableHeader,
+  TableRow,
+  Title
 } from "./MyBoard.styled";
-import supabase from "../../supabaseClient";
-import { clearAuth } from "../../redux/slices/authSlice";
+import {
+  ButtonContainer,
+  Container,
+  ProfileBtn,
+  ProfileImg,
+  ProfileLogo,
+  ProfileName,
+  ProfileSection
+} from "./MyProfile.styled";
 
 const itemsPerPage = 10;
 
@@ -75,7 +75,7 @@ const MyPage = () => {
   return (
     <Container>
       <ProfileSection>
-        <ProfileLogo src="/spartahub_logo.png" alt="로고" />
+        <ProfileLogo src="src/assets/images/spartahub_logo.png" alt="로고" />
         <ProfileImg src="/default_profile.png" alt="프로필이미지" />
         <ProfileName>{user.user_metadata.username}님</ProfileName>
         <ButtonContainer>
