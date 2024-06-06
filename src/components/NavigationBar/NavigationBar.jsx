@@ -41,7 +41,7 @@ const NavigationBar = () => {
     if (isAuthenticated) {
       navigate("/mypage");
     } else {
-      alert("로그인을 해주세요.");
+      alert("로그인 해주세요.");
       navigate("/login");
     }
   };
