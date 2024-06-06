@@ -1,10 +1,6 @@
-import {
-  BottomBanner,
-  Full,
-  H1Container,
-  TextContainer,
-  TopBanner,
-} from "./Hero.styled";
+import bottom_banner from "../../assets/images/bottom_banner.png";
+import top_banner from "../../assets/images/top_banner.png";
+import { BottomBanner, Full, H1Container, TextContainer, TopBanner } from "./Main.styled";
 
 const Hero = () => {
   return (
@@ -12,6 +8,7 @@ const Hero = () => {
       <div>
         <Full>
           <TopBanner>
+            <img src={top_banner} alt="Top Banner" />
             <TextContainer>
               <H1Container>
                 <h1>Sparta Hub</h1>
@@ -23,7 +20,9 @@ const Hero = () => {
               </div>
             </TextContainer>
           </TopBanner>
-          <BottomBanner />
+          <BottomBanner>
+            <img src={bottom_banner} alt="Bottom Banner" />
+          </BottomBanner>
         </Full>
       </div>
     </div>
