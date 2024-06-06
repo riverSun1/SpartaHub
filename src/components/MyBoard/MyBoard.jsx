@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/spartahub_logo.png";
-import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 
 import {
@@ -41,6 +40,7 @@ const MyPage = () => {
       const { data, error } = await supabase
         .from("board")
         .select("id, title, content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
+        .eq("user_id", user.id)
         .order("id", { ascending: true });
       if (error) {
         console.log("error => ", error);
@@ -85,15 +85,8 @@ const MyPage = () => {
     navigate(`/posts/${id}/edit`);
   };
 
-  const handleClickLogout = async () => {
-    try {
-      await supabase.auth.signOut();
-      dispatch(logout());
-      alert("로그아웃 되었습니다.");
-      navigate("/");
-    } catch (error) {
-      error.message;
-    }
+  const handleClickHome = () => {
+    navigate(`/`);
   };
 
   const offset = currentPage * itemsPerPage;
@@ -107,8 +100,8 @@ const MyPage = () => {
         <ProfileImg src={profileImage || defaultProfileImage} alt="프로필이미지" />
         <ProfileName>{user.user_metadata.username}님</ProfileName>
         <ButtonContainer>
+          <ProfileBtn onClick={handleClickHome}>Home</ProfileBtn>
           <ProfileBtn onClick={handleProfileEdit}>내정보변경</ProfileBtn>
-          <ProfileBtn onClick={handleClickLogout}>로그아웃</ProfileBtn>
         </ButtonContainer>
       </ProfileSection>
       <BoardSection>
