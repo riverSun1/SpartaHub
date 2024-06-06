@@ -1,32 +1,34 @@
 import { useState } from "react";
 //import { useDispatch } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login, logout } from "../../redux/slices/userSlice";
+import { login } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 import {
   Button,
   Container,
-  Form,
-  Label,
-  Input,
-  Title,
-  Span,
-  Select,
-  HubImg,
   FlexDiv,
-  ImgContainer
+  Form,
+  HubImg,
+  ImgContainer,
+  Input,
+  Label,
+  Select,
+  Span,
+  Title
 } from "./LoginForm.styled";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const loginUser = useSelector((state) => state.user.user);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(isAuthenticated);
   const [track, setTrack] = useState("");
-  const dispatch = useDispatch();
 
   // 유효성 검사
   const isValidPassword = (password) => {
@@ -79,12 +81,8 @@ const LoginForm = () => {
 
         setUser(user);
         setUsername(username);
-        // dispatch(login({ currentUser: user }));
 
         alert("회원가입 성공! 환영합니다, " + (user?.email ?? "사용자") + " (" + username + ")");
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 3000);
       } else {
         throw new Error("회원가입 후 사용자 데이터가 정의되지 않았습니다");
       }
@@ -128,26 +126,8 @@ const LoginForm = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await supabase.auth.signOut();
-      setUser(null);
-      setUsername("");
-      dispatch(logout());
-    } catch (error) {
-      console.log("로그아웃 오류:", error.message);
-    }
-  };
-
-  if (user) {
-    return (
-      <Container>
-        <Title>
-          환영합니다, {user.email} ({username})
-        </Title>
-        <Button onClick={handleLogout}>로그아웃</Button>
-      </Container>
-    );
+  if (loginUser) {
+    navigate("/mypage");
   } else {
     return (
       <Container>
@@ -179,7 +159,7 @@ const LoginForm = () => {
                 </p>
               </div>
               <ImgContainer>
-                <HubImg src="public/spartahub_logo.png" alt="홈 로고" />
+                <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
               </ImgContainer>
             </FlexDiv>
           </Form>
@@ -228,7 +208,7 @@ const LoginForm = () => {
                 </p>
               </div>
               <ImgContainer>
-                <HubImg src="public/spartahub_logo.png" alt="홈 로고" />
+                <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
               </ImgContainer>
             </FlexDiv>
           </Form>

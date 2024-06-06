@@ -5,7 +5,7 @@ export const Full = styled.div`
 `;
 
 export const TopBanner = styled.div`
-  background-image: url("public/top_banner.png");
+  background-image: url("src/assets/images/top_banner.png");
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.3) 2000px 2000px inset;
   background-size: cover;
@@ -26,7 +26,7 @@ export const TextContainer = styled.div`
 `;
 
 export const BottomBanner = styled.div`
-  background-image: url("public/bottom_banner.png");
+  background-image: url("src/assets/images/bottom_banner.png");
   background-color: white;
   background-size: contain;
   background-position: center center;

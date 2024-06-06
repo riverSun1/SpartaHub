@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "../../styles/designToken.css";
-import { useEffect, useState } from "react";
 import supabase from "../../supabaseClient";
-import { useNavigate } from "react-router-dom";
-import ReactPaginate from "react-paginate";
 
 export const BoardSection = styled.section`
   display: flex;
@@ -135,11 +136,20 @@ const TitleDiv = styled.div`
 `;
 
 const Header = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const [boards, setBoards] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-
   const itemsPerPage = 10;
+
+  // 컴포넌트가 처음 마운트될 때 로그인 상태 체크.
+  useEffect(() => {
+    if (!isAuthenticated) {
+      alert("로그인을 해주세요.");
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -172,7 +182,6 @@ const Header = () => {
   const handleChange = () => {
     navigate(`/job/1`);
   };
-
   const offset = currentPage * itemsPerPage;
   const currentPagePosts = boards.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(boards.length / itemsPerPage);
@@ -181,61 +190,63 @@ const Header = () => {
     navigate(`/post/${id}`);
   };
 
-  return (
-    <Container>
-      <BoardSection>
-        <TitleDiv>
-          <h2>채용공고 공유</h2>
-        </TitleDiv>
-        <DivBar>
-          <Pdiv>
-            <Ptag>Sort</Ptag>
-          </Pdiv>
-          <Pdiv>
-            <Ptag>Search</Ptag>
-          </Pdiv>
-          <Button onClick={handleChange}>New +</Button>
-        </DivBar>
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHeader>게시물 번호</TableHeader>
-              <TableHeader>제목</TableHeader>
-              <TableHeader>URL</TableHeader>
-              <TableHeader>일자</TableHeader>
-              <TableHeader>닉네임</TableHeader>
-            </TableRow>
-          </thead>
-          <tbody>
-            {currentPagePosts.map((board) => (
-              <TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
-                <TableData>{board.id}</TableData>
-                <TableData>{board.title}</TableData>
-                <TableData>
-                  <a href={board.url} onClick={(e) => e.stopPropagation()}>
-                    {board.url}
-                  </a>
-                </TableData>
-                <TableData>{board.created_at}</TableData>
-                <TableData>{board.users.username}</TableData>
+  if (!isAuthenticated) {
+    return null; // 로그인하지 않은 경우 아무것도 렌더링하지 않음
+  } else {
+    return (
+      <Container>
+        <BoardSection>
+          <TitleDiv>
+            <h2>채용공고 공유</h2>
+          </TitleDiv>
+          <DivBar>
+            <Pdiv>
+              <Ptag>Sort</Ptag>
+            </Pdiv>
+            <Pdiv>
+              <Ptag>Search</Ptag>
+            </Pdiv>
+            <Button onClick={handleChange}>New +</Button>
+          </DivBar>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader>게시물 번호</TableHeader>
+                <TableHeader>제목</TableHeader>
+                <TableHeader>URL</TableHeader>
+                <TableHeader>일자</TableHeader>
+                <TableHeader>닉네임</TableHeader>
               </TableRow>
-            ))}
-          </tbody>
-        </Table>
-        <PaginationContainer>
-          <Pagination
-            previousLabel={"<"}
-            nextLabel={">"}
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageClick}
-          />
-        </PaginationContainer>
-      </BoardSection>
-    </Container>
-  );
+            </thead>
+            <tbody>
+              {currentPagePosts.map((board) => (
+                <TableRow key={board.id}>
+                  <TableData>{board.id}</TableData>
+                  <TableData>{board.title}</TableData>
+                  <TableData>
+                    <a href={board.url}>{board.url}</a>
+                  </TableData>
+                  <TableData>{board.created_at}</TableData>
+                  <TableData>{board.users.username}</TableData>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+          <PaginationContainer>
+            <Pagination
+              previousLabel={"<"}
+              nextLabel={">"}
+              breakLabel={"..."}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+            />
+          </PaginationContainer>
+        </BoardSection>
+      </Container>
+    );
+  }
 };
 
 export default Header;

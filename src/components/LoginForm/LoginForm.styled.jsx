@@ -13,8 +13,6 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  // display: flex;
-  // flex-direction: column;
   width: 600px;
 `;
 
@@ -42,7 +40,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  display:block;
+  display: block;
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -65,9 +63,9 @@ export const Button = styled.button`
 `;
 
 export const Span = styled.span`
-  color: #0F3DDE;
+  color: #0f3dde;
   font-weight: normal;
-  
+
   &:hover {
     font-weight: bold;
   }
@@ -85,6 +83,6 @@ export const Select = styled.select`
   color: #333;
 `;
 
-export const FlexDiv = styled.div `
-  display:flex
-`
+export const FlexDiv = styled.div`
+  display: flex;
+`;
