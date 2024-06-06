@@ -1,5 +1,5 @@
-import bottom_banner from "../../assets/images/bottom_banner.png";
-import top_banner from "../../assets/images/top_banner.png";
+import bottom_banner from "../../assets/bottom_banner.png";
+import top_banner from "../../assets/top_banner.png";
 import { BottomBanner, Full, H1Container, TextContainer, TopBanner } from "./Main.styled";
 
 const Hero = () => {
