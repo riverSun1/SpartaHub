@@ -1,5 +1,4 @@
-import { useState } from "react";
-//import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/slices/userSlice";
@@ -43,7 +42,7 @@ const LoginForm = () => {
   };
 
   // 회원가입
-  const handleSignup = async () => {
+  const handleSignup = async (event) => {
     event.preventDefault();
 
     if (!isValidEmail(email)) {
@@ -92,7 +91,7 @@ const LoginForm = () => {
   };
 
   // 로그인
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     // 유효성 검사
@@ -126,96 +125,96 @@ const LoginForm = () => {
     }
   };
 
-  if (loginUser) {
-    navigate("/mypage");
-  } else {
-    return (
-      <Container>
-        {isLogin ? (
-          <Form>
-            <FlexDiv>
-              <div>
-                <Title style={{ fontSize: "32px", marginBottom: "8px" }}>환영합니다!</Title>
-                <h1 style={{ marginTop: "0", marginBottom: "24px" }}>아이디와 비밀번호를 입력하세요.</h1>
-                <Label htmlFor="email">Email address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <Button onClick={handleLogin}>로그인</Button>
-                <p style={{ marginTop: "16px" }}>
-                  계정이 없으신가요? <Span onClick={() => setIsLogin(false)}>회원가입</Span>
-                </p>
-              </div>
-              <ImgContainer>
-                <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
-              </ImgContainer>
-            </FlexDiv>
-          </Form>
-        ) : (
-          <Form>
-            <FlexDiv>
-              <div>
-                <Title style={{ fontSize: "16px", marginBottom: "24px" }}>
-                  스파르타에 다시 돌아온 것을 환영합니다!
-                </Title>
-                <Label htmlFor="email">Email address</Label>
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <Label htmlFor="track">Track</Label>
-                <Select value={track} onChange={(e) => setTrack(e.target.value)}>
-                  <option value="">트랙 선택</option>
-                  <option value="React">React</option>
-                  <option value="UX/UI">UX/UI</option>
-                  <option value="Node">Node</option>
-                  <option value="Java, Spring">Java, Spring</option>
-                  <option value="Game">Game</option>
-                  <option value="Android">Android</option>
-                  <option value="ios">ios</option>
-                </Select>
-                <Button onClick={handleSignup}>회원가입</Button>
-                <p style={{ marginTop: "16px" }}>
-                  이미 계정이 있으신가요? <Span onClick={() => setIsLogin(true)}>로그인</Span>
-                </p>
-              </div>
-              <ImgContainer>
-                <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
-              </ImgContainer>
-            </FlexDiv>
-          </Form>
-        )}
-      </Container>
-    );
-  }
+  useEffect(() => {
+    if (loginUser) {
+      navigate("/mypage");
+    }
+  }, [loginUser, navigate]);
+
+  return (
+    <Container>
+      {isLogin ? (
+        <Form>
+          <FlexDiv>
+            <div>
+              <Title style={{ fontSize: "32px", marginBottom: "8px" }}>환영합니다!</Title>
+              <h1 style={{ marginTop: "0", marginBottom: "24px" }}>아이디와 비밀번호를 입력하세요.</h1>
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button onClick={handleLogin}>로그인</Button>
+              <p style={{ marginTop: "16px" }}>
+                계정이 없으신가요? <Span onClick={() => setIsLogin(false)}>회원가입</Span>
+              </p>
+            </div>
+            <ImgContainer>
+              <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
+            </ImgContainer>
+          </FlexDiv>
+        </Form>
+      ) : (
+        <Form>
+          <FlexDiv>
+            <div>
+              <Title style={{ fontSize: "16px", marginBottom: "24px" }}>스파르타에 다시 돌아온 것을 환영합니다!</Title>
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Label htmlFor="password">Password</Label>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Label htmlFor="username">Username</Label>
+              <Input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <Label htmlFor="track">Track</Label>
+              <Select value={track} onChange={(e) => setTrack(e.target.value)}>
+                <option value="">트랙 선택</option>
+                <option value="React">React</option>
+                <option value="UX/UI">UX/UI</option>
+                <option value="Node">Node</option>
+                <option value="Java, Spring">Java, Spring</option>
+                <option value="Game">Game</option>
+                <option value="Android">Android</option>
+                <option value="ios">ios</option>
+              </Select>
+              <Button onClick={handleSignup}>회원가입</Button>
+              <p style={{ marginTop: "16px" }}>
+                이미 계정이 있으신가요? <Span onClick={() => setIsLogin(true)}>로그인</Span>
+              </p>
+            </div>
+            <ImgContainer>
+              <HubImg src="src/assets/images/spartahub_logo.png" alt="홈 로고" />
+            </ImgContainer>
+          </FlexDiv>
+        </Form>
+      )}
+    </Container>
+  );
 };
 
 export default LoginForm;

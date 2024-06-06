@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearAuth } from "../../redux/slices/authSlice";
 import supabase from "../../supabaseClient";
 import {
   BoardSection,
@@ -26,30 +25,52 @@ import {
 const itemsPerPage = 10;
 
 const MyPage = () => {
-  const dispatch = useDispatch();
   const [boards, setBoards] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
+  const defaultProfileImage = "/default_profile.png";
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("board")
-        .select("id, title, content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
-        .order("created_at", { ascending: false });
-      if (error) {
-        console.log("error => ", error);
-      } else {
-        const formattedData = data.map((item) => ({
-          ...item,
-          created_at: new Date(item.created_at).toLocaleString()
-        }));
-        setBoards(formattedData);
+      if (user) {
+        const { data, error } = await supabase
+          .from("board")
+          .select("id, title,  content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false });
+        if (error) {
+          console.log("error => ", error);
+        } else {
+          const formattedData = data.map((item) => ({
+            ...item,
+            created_at: new Date(item.created_at).toLocaleString()
+          }));
+          setBoards(formattedData);
+        }
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    const fetchUserImage = async () => {
+      try {
+        const { data: userData, error } = await supabase.from("users").select("image").eq("id", user.id).single();
+        if (error) {
+          throw error;
+        }
+        const profileImageUrl = userData.image || defaultProfileImage;
+        setProfileImage(profileImageUrl);
+      } catch (error) {
+        console.error("Error fetching user image:", error.message);
+      }
+    };
+    if (user) {
+      fetchUserImage();
+    }
+  }, [user]);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -63,8 +84,7 @@ const MyPage = () => {
     navigate(`/posts/${id}/edit`);
   };
 
-  const handleClickLogout = () => {
-    dispatch(clearAuth());
+  const handleClickHome = () => {
     navigate(`/`);
   };
 
@@ -76,11 +96,11 @@ const MyPage = () => {
     <Container>
       <ProfileSection>
         <ProfileLogo src="src/assets/images/spartahub_logo.png" alt="로고" />
-        <ProfileImg src="/default_profile.png" alt="프로필이미지" />
+        <ProfileImg src={profileImage || defaultProfileImage} alt="프로필이미지" />
         <ProfileName>{user.user_metadata.username}님</ProfileName>
         <ButtonContainer>
+          <ProfileBtn onClick={handleClickHome}>Home</ProfileBtn>
           <ProfileBtn onClick={handleProfileEdit}>내정보변경</ProfileBtn>
-          <ProfileBtn onClick={handleClickLogout}>로그아웃</ProfileBtn>
         </ButtonContainer>
       </ProfileSection>
       <BoardSection>

@@ -143,12 +143,12 @@ const Header = () => {
   const itemsPerPage = 10;
 
   // 컴포넌트가 처음 마운트될 때 로그인 상태 체크.
-  useEffect(() => {
-    if (!isAuthenticated) {
-      alert("로그인을 해주세요.");
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     alert("로그인을 해주세요.");
+  //     navigate("/login");
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -220,7 +220,7 @@ const Header = () => {
             </thead>
             <tbody>
               {currentPagePosts.map((board) => (
-                <TableRow key={board.id}>
+                <TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
                   <TableData>{board.id}</TableData>
                   <TableData>{board.title}</TableData>
                   <TableData>
