@@ -9,8 +9,8 @@ export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 50px;
   align-items: center;
+  margin-top: 50px;
   width: 100%;
 `;
 
@@ -149,7 +149,7 @@ const Header = () => {
       const { data, error } = await supabase
         .from("board")
         .select("id, title, content,created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
-        .order("id", { ascending: true });
+        .order("created_at", { ascending: false }); // 리스트최신글순
       if (error) {
         console.log("error => ", error);
       } else {
@@ -176,6 +176,10 @@ const Header = () => {
   const offset = currentPage * itemsPerPage;
   const currentPagePosts = boards.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(boards.length / itemsPerPage);
+
+  const handleRowClick = (id) => {
+    navigate(`/post/${id}`);
+  };
 
   return (
     <Container>
@@ -204,11 +208,13 @@ const Header = () => {
           </thead>
           <tbody>
             {currentPagePosts.map((board) => (
-              <TableRow key={board.id}>
+              <TableRow key={board.id} onClick={() => handleRowClick(board.id)}>
                 <TableData>{board.id}</TableData>
                 <TableData>{board.title}</TableData>
                 <TableData>
-                  <a href={board.url}>{board.url}</a>
+                  <a href={board.url} onClick={(e) => e.stopPropagation()}>
+                    {board.url}
+                  </a>
                 </TableData>
                 <TableData>{board.created_at}</TableData>
                 <TableData>{board.users.username}</TableData>

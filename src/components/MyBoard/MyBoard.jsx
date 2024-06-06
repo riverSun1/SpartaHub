@@ -37,7 +37,7 @@ const MyPage = () => {
       const { data, error } = await supabase
         .from("board")
         .select("id, title, content, created_at, url, user_id, users:users!board_user_id_fkey(username, track)")
-        .order("id", { ascending: true });
+        .order("created_at", { ascending: false });
       if (error) {
         console.log("error => ", error);
       } else {
