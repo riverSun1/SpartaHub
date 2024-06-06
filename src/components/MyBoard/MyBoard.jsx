@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/images/spartahub_logo.png";
+import logo from "../../assets/spartahub_logo.png";
 import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 
