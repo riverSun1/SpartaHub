@@ -5,6 +5,7 @@ import MyPage from "../pages/MyPage";
 import NoticeBoard from "../pages/NoticeBoard";
 import ProfileEdit from "../pages/ProfileEdit";
 import MyBoardEdit from "../components/MyBoardEdit/MyBoardEdit";
+import NoticeboardModify from "../pages/NoticeboardModify";
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/posts/:id/edit" element={<MyBoardEdit />} />
         <Route path="/noticeboard" element={<NoticeBoard />} />
+        <Route path="/job/:id" element={<NoticeboardModify />} />
         <Route path="/mypage/:id" element={<ProfileEdit />} />
       </Routes>
     </BrowserRouter>

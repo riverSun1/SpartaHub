@@ -66,7 +66,7 @@ export const Pagination = styled(ReactPaginate).attrs({
     &.active a {
       background-color: var(--red-90);
       color: var(--pink-90);
-      border-radius: 3px;
+      border-radius: 20px;
     }
 
     &:hover:not(.active) a {
