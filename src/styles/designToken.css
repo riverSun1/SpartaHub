@@ -1,4 +1,3 @@
-/* 기본 color setting */
 :root {
   --background-color: #ffffff;
   --white: #ffffff;
@@ -30,8 +29,6 @@
   --red-30: #b20c0c;
   --red-20: #750404;
   --red-10: #3b0101;
-
-  /* 스파르타 색상 */
 
   --green-40: #e7f9e7;
   --green-20: #7bd779;

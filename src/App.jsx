@@ -6,11 +6,9 @@ import GlobalStyle from "./styles/Globalstyle";
 import supabase from "./supabaseClient";
 function App() {
   const dispatch = useDispatch();
-  // const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   async function checkLogin() {
     const session = await supabase.auth.getSession();
     const user = session.data.session?.user;
-    // console.log(user);
     if (user) {
       dispatch(login(user));
     } else {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/slices/userSlice";
@@ -29,7 +29,6 @@ const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(isAuthenticated);
   const [track, setTrack] = useState("");
 
-  // 유효성 검사
   const isValidPassword = (password) => {
     return password.length >= 6;
   };
@@ -41,7 +40,6 @@ const LoginForm = () => {
     return username.length >= 2;
   };
 
-  // 회원가입
   const handleSignup = async (event) => {
     event.preventDefault();
 
@@ -67,17 +65,12 @@ const LoginForm = () => {
         }
       });
 
-      console.log(user);
-      console.log(error);
-
       if (error) throw error;
 
       if (user) {
-        // 사용자 데이터 `users` 커스텀 테이블에 추가
         const { error: insertError } = await supabase.from("users").insert([{ id: user.user.id, username, track }]);
 
         if (insertError) throw insertError;
-
         setUser(user);
         setUsername(username);
 
@@ -86,15 +79,13 @@ const LoginForm = () => {
         throw new Error("회원가입 후 사용자 데이터가 정의되지 않았습니다");
       }
     } catch (error) {
-      console.log("회원가입 오류:", error.message);
+      error.message;
     }
   };
 
-  // 로그인
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    // 유효성 검사
     if (!isValidEmail(email)) {
       alert("유효한 이메일 주소를 입력해주세요.");
       return;
@@ -109,10 +100,8 @@ const LoginForm = () => {
         email,
         password
       });
-      console.log(data);
-      console.log(error);
+
       if (error) {
-        console.log("로그인 오류:", error.message);
         throw error;
       }
 
@@ -121,7 +110,7 @@ const LoginForm = () => {
         navigate("/mypage");
       }
     } catch (error) {
-      console.log("로그인 오류:", error.message);
+      error.message;
     }
   };
 

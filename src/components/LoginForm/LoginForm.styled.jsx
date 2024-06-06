@@ -26,8 +26,6 @@ export const ImgContainer = styled.div`
 export const HubImg = styled.img`
   object-fit: cover;
   width: 250px;
-  /* height: 150px; */
-  /* margin-left: 100px; */
 `;
 
 export const Title = styled.h2`

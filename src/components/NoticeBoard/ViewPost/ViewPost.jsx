@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import supabase from "../../supabaseClient";
-import { Container, DetailSection, Title, UrlLink, Content, User, StyledDate, Nav } from "./ViewPost.style.jsx";
-import NavigationBar from "../NavigationBar/NavigationBar";
+import supabase from "../../../supabaseClient";
+import NavigationBar from "../../NavigationBar/NavigationBar";
+import { Container, Content, DetailSection, Nav, StyledDate, Title, UrlLink, User } from "./ViewPost.style.jsx";
 
 const ViewPost = () => {
   const { id } = useParams();

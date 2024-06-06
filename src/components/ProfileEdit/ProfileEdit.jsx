@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from "../supabaseClient";
+import supabase from "../../supabaseClient";
 import {
   CircularImage,
   EditButton,
@@ -71,13 +71,10 @@ const ProfileEdit = () => {
           .upload(`${user.id}/${crypto.randomUUID()}.jpg`, image, {
             upsert: true
           });
-        console.log(imageData);
         if (imageError) {
           throw imageError;
         }
-        // profileImageUrl = supabase.storage.from("avatars").getPublicUrl(imageData.path).publicURL;
         profileImageUrl = imageData;
-        console.log(profileImageUrl);
       }
       const updatedData = {
         username: username || user.username,
@@ -88,11 +85,11 @@ const ProfileEdit = () => {
       if (error) {
         throw error;
       }
-      // setNotification("프로필이 성공적으로 업데이트되었습니다.");
+
       alert("프로필이 성공적으로 업데이트되었습니다.");
       navigate("/mypage");
     } catch (error) {
-      console.error("프로필 업데이트 중 오류가 발생했습니다:", error.message);
+      error.message;
       setNotification("프로필 업데이트 중 오류가 발생했습니다.");
     }
   };

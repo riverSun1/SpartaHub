@@ -1,24 +1,25 @@
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
-import "../../styles/designToken.css";
 
 export const BoardSection = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 50px;
   align-items: center;
+  margin-top: 50px;
   width: 100%;
 `;
+
 export const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   padding: 20px;
 `;
 
-export const Title = styled.h1`
-  font-size: 2em;
-  margin-bottom: 50px;
+export const Ptag = styled.p`
+  font-size: 13px;
+  margin: 0;
+  padding-top: 10px;
 `;
 
 export const Table = styled.table`
@@ -61,11 +62,17 @@ export const Pagination = styled(ReactPaginate).attrs({
 })`
   display: flex;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
+
   li {
+    display: inline-block;
+    margin: 0 5px;
+
     &.active a {
       background-color: var(--red-90);
       color: var(--pink-90);
-      border-radius: 20px;
+      border-radius: 3px;
     }
 
     &:hover:not(.active) a {
@@ -78,5 +85,46 @@ export const Pagination = styled(ReactPaginate).attrs({
       color: var(--black);
       text-decoration: none;
     }
+  }
+`;
+
+export const DivBar = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-end;
+  cursor: pointer;
+`;
+export const Button = styled.button`
+  background-color: var(--pink-50);
+  color: var(--purple-90);
+  margin-bottom: 5px;
+  width: 8%;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--red-30);
+    color: var(--red-99);
+  }
+`;
+
+export const Pdiv = styled.div`
+  display: flex;
+  p {
+    text-align: center;
+    line-height: 20px;
+  }
+`;
+
+export const TitleDiv = styled.div`
+  width: 100%;
+  height: 40px;
+  h1 {
+    font-size: 5em;
+    text-align: center;
+    line-height: 200px;
   }
 `;

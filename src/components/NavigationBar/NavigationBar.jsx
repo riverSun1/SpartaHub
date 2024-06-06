@@ -33,7 +33,7 @@ const NavigationBar = () => {
       alert("로그아웃 되었습니다.");
       navigate("/");
     } catch (error) {
-      console.log("로그아웃 오류:", error.message);
+      error.message;
     }
   };
 
