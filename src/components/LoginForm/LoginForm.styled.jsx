@@ -26,8 +26,6 @@ export const ImgContainer = styled.div`
 export const HubImg = styled.img`
   object-fit: cover;
   width: 250px;
-  /* height: 150px; */
-  /* margin-left: 100px; */
 `;
 
 export const Title = styled.h2`
@@ -56,7 +54,7 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   &:hover {
-    background-color: #e8344e;
+    background-color: #fd5972;
   }
   margin-top: 20px;
   width: 322px;
@@ -65,7 +63,7 @@ export const Button = styled.button`
 export const Span = styled.span`
   color: #0f3dde;
   font-weight: normal;
-
+  cursor: pointer;
   &:hover {
     font-weight: bold;
   }

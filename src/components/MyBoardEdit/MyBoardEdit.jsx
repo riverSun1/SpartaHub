@@ -1,21 +1,21 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import NavigationBar from "../NavigationBar/NavigationBar.jsx";
-import { updatePost, deletePost } from "../../redux/slices/postsSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { deletePost, updatePost } from "../../redux/slices/postsSlice";
 import supabase from "../../supabaseClient";
 import {
+  ButtonContainer,
   Container,
-  Title,
-  EditSection,
-  EditForm,
-  EditField,
-  EditLabel,
-  EditInputTitle,
-  EditTextAreaContent,
   EditButton,
-  ButtonContainer
+  EditField,
+  EditForm,
+  EditInputTitle,
+  EditLabel,
+  EditSection,
+  EditTextAreaContent,
+  Title
 } from "../MyBoardEdit/MyBoardEdit.style";
+import NavigationBar from "../NavigationBar/NavigationBar.jsx";
 
 const MyBoardEdit = () => {
   const [title, setTitle] = useState("");
@@ -34,7 +34,6 @@ const MyBoardEdit = () => {
           console.error("게시물을 불러오는 중 오류가 발생했습니다:", error);
         } else {
           if (!data) {
-            console.error("게시물을 찾을 수 없습니다.");
             navigate("/mypage");
             return;
           }
@@ -54,13 +53,14 @@ const MyBoardEdit = () => {
       const { error } = await supabase.from("board").update({ title, url, content }).eq("id", parseInt(id));
 
       if (error) {
-        console.error("게시물 업데이트 중 오류가 발생했습니다:", error);
+        error.message;
       } else {
         dispatch(updatePost({ id: parseInt(id), title, url, content }));
+        alert("게시물이 수정되었습니다.");
         navigate("/mypage");
       }
     } catch (error) {
-      console.error("게시물 업데이트 중 오류가 발생했습니다:", error);
+      error.message;
     }
   };
 
@@ -69,13 +69,13 @@ const MyBoardEdit = () => {
       const { error } = await supabase.from("board").delete().eq("id", parseInt(id));
 
       if (error) {
-        console.error("게시물 삭제 중 오류가 발생했습니다:", error);
+        error.message;
       } else {
         dispatch(deletePost({ id: parseInt(id) }));
         navigate("/mypage");
       }
     } catch (error) {
-      console.error("게시물 삭제 중 오류가 발생했습니다:", error);
+      error.message;
     }
   };
 

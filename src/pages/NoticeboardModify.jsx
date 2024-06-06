@@ -1,5 +1,5 @@
 import NavigationBar from "../components/NavigationBar/NavigationBar";
-import BoardList from "../components/NoticeBoard/BoardList";
+import BoardList from "../components/NoticeBoard/BoardList/BoardList";
 const NoticeboardModify = () => {
   return (
     <>

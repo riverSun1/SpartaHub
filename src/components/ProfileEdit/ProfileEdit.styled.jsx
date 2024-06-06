@@ -73,5 +73,5 @@ export const Select = styled.select`
   border-radius: 4px;
   background-color: white;
   font-size: 14px;
-  color: #333; /* username과 동일한 색상 */
+  color: #333;
 `;

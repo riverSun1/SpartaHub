@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearAuth } from "../../redux/slices/authSlice";
+import logo from "../../assets/images/spartahub_logo.png";
+import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
+
 import {
   BoardSection,
   Pagination,
@@ -29,8 +31,10 @@ const MyPage = () => {
   const dispatch = useDispatch();
   const [boards, setBoards] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
+  const defaultProfileImage = "/default_profile.png";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +53,25 @@ const MyPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    const fetchUserImage = async () => {
+      try {
+        const { data: userData, error } = await supabase.from("users").select("image").eq("id", user.id).single();
+        if (error) {
+          throw error;
+        }
+        const profileImageUrl = userData.image || defaultProfileImage;
+        setProfileImage(profileImageUrl);
+      } catch (error) {
+        error.message;
+      }
+    };
+    if (user) {
+      fetchUserImage();
+    }
+  }, [user]);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -63,9 +85,15 @@ const MyPage = () => {
     navigate(`/posts/${id}/edit`);
   };
 
-  const handleClickLogout = () => {
-    dispatch(clearAuth());
-    navigate(`/`);
+  const handleClickLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      dispatch(logout());
+      alert("로그아웃 되었습니다.");
+      navigate("/");
+    } catch (error) {
+      error.message;
+    }
   };
 
   const offset = currentPage * itemsPerPage;
@@ -75,8 +103,8 @@ const MyPage = () => {
   return (
     <Container>
       <ProfileSection>
-        <ProfileLogo src="src/assets/images/spartahub_logo.png" alt="로고" />
-        <ProfileImg src="/default_profile.png" alt="프로필이미지" />
+        <ProfileLogo src={logo} alt="로고" />
+        <ProfileImg src={profileImage || defaultProfileImage} alt="프로필이미지" />
         <ProfileName>{user.user_metadata.username}님</ProfileName>
         <ButtonContainer>
           <ProfileBtn onClick={handleProfileEdit}>내정보변경</ProfileBtn>
