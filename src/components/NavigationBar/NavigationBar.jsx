@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import loginLogo from "../../assets/images/login_icon.png";
-import hubLogo from "../../assets/images/spartahub_logo.png";
+import loginLogo from "../../assets/login_icon.png";
+import hubLogo from "../../assets/spartahub_logo.png";
 import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 import {
