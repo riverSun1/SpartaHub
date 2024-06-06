@@ -1,33 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import supabase from "../../supabaseClient";
 
 const initialState = {
-  posts: [
-    { id: 1, title: "1 번째 게시물", date: "2024-06-01", nickname: "사용자1" },
-    { id: 2, title: "2 번째 게시물", date: "2024-06-02", nickname: "사용자1" },
-    { id: 3, title: "3 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 4, title: "4 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 5, title: "5 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 6, title: "6 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 7, title: "7 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 8, title: "8 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 9, title: "9 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 10, title: "10 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 11, title: "11 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 12, title: "12 번째 게시물", date: "2024-06-03", nickname: "사용자1" },
-    { id: 13, title: "13 번째 게시물", date: "2024-06-03", nickname: "사용자1" }
-  ]
+  posts: []
 };
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    setPosts(state, action) {
+      state.posts = action.payload;
+    },
     updatePost(state, action) {
-      const { id, title, content } = action.payload;
+      const { id, title, content, url, created_at, updated_at, user_id } = action.payload;
       const existingPost = state.posts.find((post) => post.id === id);
       if (existingPost) {
         existingPost.title = title;
+        existingPost.url = url;
         existingPost.content = content;
+        existingPost.created_at = created_at;
+        existingPost.updated_at = updated_at;
+        existingPost.user_id = user_id;
       }
     },
     deletePost(state, action) {
@@ -37,5 +31,13 @@ const postsSlice = createSlice({
   }
 });
 
-export const { updatePost, deletePost } = postsSlice.actions;
+export const { setPosts, updatePost, deletePost } = postsSlice.actions;
+export const fetchPosts = () => async (dispatch) => {
+  const { data, error } = await supabase.from("board").select();
+  if (error) {
+    console.error("Error fetching posts:", error);
+  } else {
+    dispatch(setPosts(data));
+  }
+};
 export default postsSlice.reducer;

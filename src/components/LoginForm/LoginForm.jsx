@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { login, logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 import {
-  Button, 
-  Container, 
-  Form, 
-  Label, 
-  Input, 
-  Title, 
-  Span, 
+  Button,
+  Container,
+  Form,
+  Label,
+  Input,
+  Title,
+  Span,
   Select,
   HubImg,
   FlexDiv,
@@ -62,8 +62,8 @@ const LoginForm = () => {
         email,
         password,
         options: {
-          data: { username },
-        },
+          data: { username }
+        }
       });
 
       console.log(user);
@@ -73,9 +73,7 @@ const LoginForm = () => {
 
       if (user) {
         // 사용자 데이터 `users` 커스텀 테이블에 추가
-        const { error: insertError } = await supabase
-          .from("users")
-          .insert([{ id: user.user.id, username, track }]);
+        const { error: insertError } = await supabase.from("users").insert([{ id: user.user.id, username, track }]);
 
         if (insertError) throw insertError;
 
@@ -83,13 +81,7 @@ const LoginForm = () => {
         setUsername(username);
         // dispatch(login({ currentUser: user }));
 
-        alert(
-          "회원가입 성공! 환영합니다, " +
-            (user?.email ?? "사용자") +
-            " (" +
-            username +
-            ")"
-        );
+        alert("회원가입 성공! 환영합니다, " + (user?.email ?? "사용자") + " (" + username + ")");
         // setTimeout(() => {
         //   navigate("/");
         // }, 3000);
@@ -118,7 +110,7 @@ const LoginForm = () => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
-        password,
+        password
       });
       console.log(data);
       console.log(error);
@@ -163,41 +155,41 @@ const LoginForm = () => {
           <Form>
             <FlexDiv>
               <div>
-                <Title style={{ fontSize: '32px', marginBottom: '8px' }}>환영합니다!</Title>
-                <h1 style={{ marginTop: '0', marginBottom: '24px' }}>아이디와 비밀번호를 입력하세요.</h1>
-                  <Label htmlFor="email">Email address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                <Title style={{ fontSize: "32px", marginBottom: "8px" }}>환영합니다!</Title>
+                <h1 style={{ marginTop: "0", marginBottom: "24px" }}>아이디와 비밀번호를 입력하세요.</h1>
+                <Label htmlFor="email">Email address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <Button onClick={handleLogin}>로그인</Button>
-                <p style={{ marginTop: '16px' }}>
-                  계정이 없으신가요?{" "}
-                  <Span onClick={() => setIsLogin(false)}>회원가입</Span>
+                <p style={{ marginTop: "16px" }}>
+                  계정이 없으신가요? <Span onClick={() => setIsLogin(false)}>회원가입</Span>
                 </p>
               </div>
               <ImgContainer>
                 <HubImg src="public/spartahub_logo.png" alt="홈 로고" />
               </ImgContainer>
             </FlexDiv>
-            
           </Form>
         ) : (
           <Form>
             <FlexDiv>
               <div>
-                <Title style={{ fontSize: '16px', marginBottom: '24px' }}>스파르타에 다시 돌아온 것을 환영합니다!</Title>
+                <Title style={{ fontSize: "16px", marginBottom: "24px" }}>
+                  스파르타에 다시 돌아온 것을 환영합니다!
+                </Title>
                 <Label htmlFor="email">Email address</Label>
                 <Input
                   type="email"
@@ -231,9 +223,8 @@ const LoginForm = () => {
                   <option value="ios">ios</option>
                 </Select>
                 <Button onClick={handleSignup}>회원가입</Button>
-                <p style={{ marginTop: '16px' }}>
-                  이미 계정이 있으신가요?{" "}
-                  <Span onClick={() => setIsLogin(true)}>로그인</Span>
+                <p style={{ marginTop: "16px" }}>
+                  이미 계정이 있으신가요? <Span onClick={() => setIsLogin(true)}>로그인</Span>
                 </p>
               </div>
               <ImgContainer>

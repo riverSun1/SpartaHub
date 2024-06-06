@@ -1,5 +1,12 @@
+import NavigationBar from "../../src/components/NavigationBar/NavigationBar";
+import Header from "../components/NoticeBoard/Header";
 const NoticeBoard = () => {
-  return <div>NoticeBoard</div>;
+  return (
+    <>
+      <NavigationBar />
+      <Header />
+    </>
+  );
 };
 
 export default NoticeBoard;
