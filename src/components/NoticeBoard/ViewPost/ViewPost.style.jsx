@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import "../../styles/designToken.css";
+import "../../../styles/Globalstyle";
 
 export const Container = styled.div`
   width: 100%;

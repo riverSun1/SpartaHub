@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/spartahub_logo.png";
-// import { clearAuth } from "../../redux/slices/authSlice";
 import { logout } from "../../redux/slices/userSlice";
 import supabase from "../../supabaseClient";
 
@@ -66,7 +65,7 @@ const MyPage = () => {
         const profileImageUrl = userData.image || defaultProfileImage;
         setProfileImage(profileImageUrl);
       } catch (error) {
-        console.error("Error fetching user image:", error.message);
+        error.message;
       }
     };
     if (user) {
@@ -93,7 +92,7 @@ const MyPage = () => {
       alert("로그아웃 되었습니다.");
       navigate("/");
     } catch (error) {
-      console.log("로그아웃 오류:", error.message);
+      error.message;
     }
   };
 

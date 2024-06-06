@@ -5,9 +5,9 @@ export const Navbar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white; /* 배경색 추가 */
+  background-color: white;
   padding: 20px 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const LogoContainer = styled.div`
@@ -20,9 +20,6 @@ export const NavList = styled.ul`
   align-items: center;
   margin: 0;
   padding: 0;
-  /* &:hover {
-    text-decoration: underline;
-  } */
 `;
 
 export const NavItem = styled.li`
