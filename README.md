@@ -34,7 +34,7 @@
 
 ### 📅 와이어프레임
 
-<img src="https://github.com/riverSun1/SpartaHub2/assets/67379144/6409282b-9fb7-443a-a6c3-103cbbe60c20" width="900"/>
+<img src="https://github.com/riverSun1/SpartaHub/assets/67379144/f28ed01f-48b6-4bbf-ba2d-2703127e37a1" width="900"/>
 <br/><br/>
 
 ### 🙋‍♂️ 프로젝트 멤버
